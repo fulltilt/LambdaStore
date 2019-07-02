@@ -12,10 +12,10 @@
     "claudia": "^4.0.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.124.0",
     "claudia-api-builder": "^4.1.2",
     "claudia-bot-builder": "^4.5.0",
-    "uuid": "^3.3.2",
-    "aws-sdk": "^2.124.0"
+    "minimal-request-promise": "^1.5.0"
   },
   "author": "",
   "description": ""

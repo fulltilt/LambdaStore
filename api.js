@@ -11,15 +11,17 @@ const createOrder = require("./handlers/create-order");
 const getOrders = require("./handlers/get-orders");
 const updateOrder = require("./handlers/update-order");
 const deleteOrder = require("./handlers/delete-order");
+const updateDeliveryStatus = require("./handlers/ update-delivery-status");
 
 api.get("/", () => "Welcome to Pizza API");
 
-/*
+/* List all items in a table
 aws dynamodb scan \
   --table-name pizza-orders \
   --region us-west-1 \
   --output json
 */
+
 api.get("/pizzas", () => {
   return getPizzas();
 });
@@ -86,8 +88,8 @@ api.post(
 curl -i \
   -H "Content-Type: application/json" \
   -X PUT \
-  -d '{"pizzaId":2}' \
-  https://agahhfd682.execute-api.us-west-1.amazonaws.com/latest/orders/42
+  -d '{"pizzaId":2, "address": "800 Hale Way"}' \
+  https://agahhfd682.execute-api.us-west-1.amazonaws.com/latest/orders/{some id}
 */
 api.put(
   "/orders/{id}",
@@ -103,7 +105,7 @@ api.put(
 curl -i \
   -H "Content-Type: application/json" \
   -X DELETE \
-  https://agahhfd682.execute-api.us-west-1.amazonaws.com/latest/orders/42
+  https://agahhfd682.execute-api.us-west-1.amazonaws.com/latest/orders/{some id}
 */
 api.delete(
   "/orders/{id}",
@@ -111,8 +113,14 @@ api.delete(
     return deleteOrder(request.pathParams.id);
   },
   {
+    success: 200,
     error: 400
   }
 );
+
+api.post("/delivery", request => updateDeliveryStatus(request.body), {
+  success: 200,
+  error: 400
+});
 
 module.exports = api;
