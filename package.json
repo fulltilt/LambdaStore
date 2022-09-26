@@ -9,7 +9,7 @@
   "keywords": [],
   "license": "MIT",
   "devDependencies": {
-    "claudia": "^4.0.0"
+    "claudia": "^5.14.1"
   },
   "dependencies": {
     "aws-sdk": "^2.124.0",
